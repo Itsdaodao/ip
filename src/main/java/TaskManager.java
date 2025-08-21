@@ -30,4 +30,18 @@ public class TaskManager {
         }
         System.out.println("EEE EEE AAA AAA remember to do them all");
     }
+
+    public void markTaskAsDone(int taskNumber) {
+        Task task = taskLists.get(taskNumber - 1);
+        task.markAsDone();
+        System.out.println("Good job! Here is a banana for you! " + BANANA);
+        System.out.println("[X] " + task.getDescription());
+    }
+
+    public void markTaskAsNotDone(int taskNumber) {
+        Task task = taskLists.get(taskNumber - 1);
+        task.markAsNotDone();
+        System.out.println("Come on! You can do it! " + MONKEY);
+        System.out.println("[ ] " + task.getDescription());
+    }
 }
