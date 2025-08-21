@@ -22,6 +22,8 @@ public class George {
 
     private static void echo() {
         Scanner scanner = new Scanner(System.in);
+        TaskManager manager = new TaskManager();
+
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
@@ -29,9 +31,13 @@ public class George {
                         + "\nplease bring bananas next time";
                 System.out.println("\n" + exit);
                 break;
+            } else if (input.equals("list")) {
+                manager.listTasks();
+            } else {
+                System.out.println(newLine);
+                manager.addTask(input);
+                System.out.println(newLine);
             }
-
-            System.out.println(newLine + input + newLine);
         }
         scanner.close();
     }
