@@ -25,7 +25,7 @@ public class TaskManager {
         System.out.println("OOO OOO AAA AAA here is all your tasks");
         for (int i = 0; i < taskLists.size(); i++) {
             Task task = taskLists.get(i);
-            String done = task.isDone() ? "[X]" : "[ ]";
+            String done = task.isDone() ? "[X] " : "[ ] ";
             System.out.println((i + 1) + "." + done + task.getDescription());
         }
         System.out.println("EEE EEE AAA AAA remember to do them all");
