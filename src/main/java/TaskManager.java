@@ -17,9 +17,16 @@ public class TaskManager {
     }
 
     public void listTasks() {
+        if (taskLists.isEmpty()) {
+            System.out.println("Wow you have no tasks! Here is a banana!" + BANANA);
+            return;
+        }
+
         System.out.println("OOO OOO AAA AAA here is all your tasks");
         for (int i = 0; i < taskLists.size(); i++) {
-            System.out.println((i + 1) + ". " + taskLists.get(i));
+            Task task = taskLists.get(i);
+            String done = task.isDone() ? "[X]" : "[ ]";
+            System.out.println((i + 1) + "." + done + task.getDescription());
         }
         System.out.println("EEE EEE AAA AAA remember to do them all");
     }
