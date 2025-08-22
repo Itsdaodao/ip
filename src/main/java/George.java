@@ -57,6 +57,9 @@ public class George {
                     String start = splits[1].trim();
                     String end = splits[2].trim();
                     manager.addEventTask(description, start, end);
+                } else if (input.startsWith("delete ")) {
+                    int taskNumber = Integer.parseInt(input.substring(7));
+                    manager.deleteTask(taskNumber);
                 } else {
                     throw new GeorgeException("What are you saying???");
                 }

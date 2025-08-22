@@ -28,6 +28,13 @@ public class TaskManager {
                 "Remember to do them NOW!!!\n");
     }
 
+    public void deleteTask(int taskNumber) {
+        Task removedTask = taskLists.remove(taskNumber - 1);
+        System.out.println("George will turn this task into a banana:");
+        System.out.println(removedTask.getDisplayText());
+        System.out.println("You now have " + taskLists.size() + " tasks in the list.");
+    }
+
     public void listTasks() {
         if (taskLists.isEmpty()) {
             System.out.println("Wow you have no tasks! Here is a banana!");
