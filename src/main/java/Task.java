@@ -1,8 +1,32 @@
-interface Task {
-    String getDescription();
-    boolean isDone();
-    void markAsDone();
-    void markAsNotDone();
-    String getStatus();
-    String getType();
+abstract class Task {
+    protected String description;
+    protected boolean isDone;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    public void markAsNotDone() {
+        this.isDone = false;
+    }
+
+    public String getStatus() {
+        return isDone ? "[X]" : "[ ]";
+    }
+
+    abstract String getType();
+    abstract String getDisplayText();
 }

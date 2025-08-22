@@ -1,37 +1,9 @@
-public class DeadlineTask implements Task {
-    private final String description;
-    private boolean isDone;
+public class DeadlineTask extends Task {
     private String deadline;
 
     public DeadlineTask(String description, String deadline) {
-        this.description = description;
-        this.isDone = false;
+        super(description);
         this.deadline = deadline;
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public boolean isDone() {
-        return isDone;
-    }
-
-    @Override
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    @Override
-    public void markAsNotDone() {
-        this.isDone = false;
-    }
-
-    @Override
-    public String getStatus() {
-        return isDone ? "[X]" : "[ ]";
     }
 
     @Override
@@ -44,7 +16,8 @@ public class DeadlineTask implements Task {
     }
 
     @Override
-    public String toString() {
-        return this.getType() + this.getStatus() + " " + this.getDescription() + " (by: " + this.getDeadline() + ")";
+    public String getDisplayText() {
+        return this.getType() + this.getStatus()
+                + " " + this.getDescription() + " (by: " + this.getDeadline() + ")";
     }
 }
