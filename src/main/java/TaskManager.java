@@ -9,11 +9,29 @@ public class TaskManager {
 
     private ArrayList<Task> taskLists = new ArrayList<>();
 
-    public void addTask(String description) {
-        taskLists.add(new Task(description));
-        System.out.println("ooo ooo aaa aaa");
-        System.out.println("Added: " + description);
-        System.out.println("eee eee aaa aaa");
+    public void addToDo(String description) {
+        Task task = new ToDoTask(description);
+        taskLists.add(task);
+        addTask(task.getDisplayText());
+    }
+
+    public void addDeadlineTask(String description, String date) {
+        Task task = new DeadlineTask(description, date);
+        taskLists.add(task);
+        addTask(task.getDisplayText());
+    }
+
+    public void addEventTask(String description, String startTime, String endTime) {
+        Task task = new EventTask(description, startTime, endTime);
+        taskLists.add(task);
+        addTask(task.getDisplayText());
+    }
+
+    public void addTask(String displayText) {
+        System.out.println("You get a task. I get a banana" + BANANA);
+        System.out.println(displayText);
+        System.out.println("You now have " + taskLists.size() + " things to do!!!\n" +
+                "Remember to do them NOW!!!");
     }
 
     public void listTasks() {
