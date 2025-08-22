@@ -1,7 +1,7 @@
 public class DeadlineTask extends Task {
     private String deadline;
 
-    public DeadlineTask(String description, String deadline) {
+    public DeadlineTask(String description, String deadline) throws GeorgeException {
         super(description);
         this.deadline = deadline;
     }

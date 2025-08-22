@@ -3,19 +3,19 @@ import java.util.ArrayList;
 public class TaskManager {
     private ArrayList<Task> taskLists = new ArrayList<>();
 
-    public void addToDo(String description) {
+    public void addToDo(String description) throws GeorgeException {
         Task task = new ToDoTask(description);
         taskLists.add(task);
         addTask(task.getDisplayText());
     }
 
-    public void addDeadlineTask(String description, String date) {
+    public void addDeadlineTask(String description, String date) throws GeorgeException {
         Task task = new DeadlineTask(description, date);
         taskLists.add(task);
         addTask(task.getDisplayText());
     }
 
-    public void addEventTask(String description, String startTime, String endTime) {
+    public void addEventTask(String description, String startTime, String endTime) throws GeorgeException {
         Task task = new EventTask(description, startTime, endTime);
         taskLists.add(task);
         addTask(task.getDisplayText());

@@ -7,7 +7,7 @@ public class George {
             
             """;
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         greet();
         echo();
     }
@@ -28,38 +28,40 @@ public class George {
 
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            if (input.equals("bye")) {
-                String exit = "I love bananas " +
-                        "\nplease bring bananas next time";
-                System.out.println("\n" + exit);
-                break;
-            } else if (input.equals("list")) {
-                manager.listTasks();
-            } else if (input.startsWith("mark ")) {
-                int taskNumber = Integer.parseInt(input.substring(5));
-                manager.markTaskAsDone(taskNumber);
-            } else if (input.startsWith("unmark ")) {
-                int taskNumber = Integer.parseInt(input.substring(7));
-                manager.markTaskAsNotDone(taskNumber);
-            } else if (input.startsWith("todo ")) {
-                String description = input.substring(5);
-                manager.addToDo(description);
-            } else if (input.startsWith("deadline ")) {
-                String content = input.substring(9);
-                String description = content.split("/by")[0].trim();
-                String date = content.split("/by")[1].trim();
-                manager.addDeadlineTask(description, date);
-            } else if (input.startsWith("event ")) {
-                String content = input.substring(6);
-                String[] splits = content.split("/from | /to");
-                String description = splits[0].trim();
-                String start = splits[1].trim();
-                String end = splits[2].trim();
-                manager.addEventTask(description, start, end);
-            } else {
-                System.out.println(newLine);
-                manager.addTask(input);
-                System.out.println(newLine);
+            try {
+                if (input.equals("bye")) {
+                    String exit = "I love bananas " +
+                            "\nplease bring bananas next time";
+                    System.out.println("\n" + exit);
+                    break;
+                } else if (input.equals("list")) {
+                    manager.listTasks();
+                } else if (input.startsWith("mark ")) {
+                    int taskNumber = Integer.parseInt(input.substring(5));
+                    manager.markTaskAsDone(taskNumber);
+                } else if (input.startsWith("unmark ")) {
+                    int taskNumber = Integer.parseInt(input.substring(7));
+                    manager.markTaskAsNotDone(taskNumber);
+                } else if (input.startsWith("todo ")) {
+                    String description = input.substring(5);
+                    manager.addToDo(description);
+                } else if (input.startsWith("deadline ")) {
+                    String content = input.substring(9);
+                    String description = content.split("/by")[0].trim();
+                    String date = content.split("/by")[1].trim();
+                    manager.addDeadlineTask(description, date);
+                } else if (input.startsWith("event ")) {
+                    String content = input.substring(6);
+                    String[] splits = content.split("/from | /to");
+                    String description = splits[0].trim();
+                    String start = splits[1].trim();
+                    String end = splits[2].trim();
+                    manager.addEventTask(description, start, end);
+                } else {
+                    throw new GeorgeException("What are you saying???");
+                }
+            }  catch (GeorgeException e) {
+                System.out.println(e.toString());
             }
         }
         scanner.close();

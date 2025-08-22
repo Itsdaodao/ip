@@ -2,7 +2,7 @@ public class EventTask extends Task {
     private String startTime;
     private String endTime;
 
-    public EventTask(String description, String startTime, String endTime) {
+    public EventTask(String description, String startTime, String endTime) throws GeorgeException {
         super(description);
         this.startTime = startTime;
         this.endTime = endTime;
