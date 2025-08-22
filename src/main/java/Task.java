@@ -4,4 +4,5 @@ interface Task {
     void markAsDone();
     void markAsNotDone();
     String getStatus();
+    String getType();
 }
