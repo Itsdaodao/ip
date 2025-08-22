@@ -39,6 +39,21 @@ public class George {
             } else if (input.startsWith("unmark ")) {
                 int taskNumber = Integer.parseInt(input.substring(7));
                 manager.markTaskAsNotDone(taskNumber);
+            } else if (input.startsWith("todo ")) {
+                String description = input.substring(5);
+                manager.addToDo(description);
+            } else if (input.startsWith("deadline ")) {
+                String content = input.substring(9);
+                String description = content.split("/by")[0].trim();
+                String date = content.split("/by")[1].trim();
+                manager.addDeadlineTask(description, date);
+            } else if (input.startsWith("event ")) {
+                String content = input.substring(6);
+                String[] splits = content.split("/from | /to");
+                String description = splits[0].trim();
+                String start = splits[1].trim();
+                String end = splits[2].trim();
+                manager.addEventTask(description, start, end);
             } else {
                 System.out.println(newLine);
                 manager.addTask(input);
