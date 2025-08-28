@@ -1,3 +1,5 @@
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class TaskManager {
@@ -61,5 +63,9 @@ public class TaskManager {
         task.markAsNotDone();
         System.out.println("Come on! You can do it!");
         System.out.println("[ ] " + task.getDescription());
+    }
+
+    private void saveTasks() {
+
     }
 }
