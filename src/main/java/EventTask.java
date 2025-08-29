@@ -3,9 +3,14 @@ public class EventTask extends Task {
     private String endTime;
 
     public EventTask(String description, String startTime, String endTime) throws GeorgeException {
+        this(description, startTime, endTime, false);
+    }
+
+    public EventTask(String description, String startTime, String endTime, boolean isDone) throws GeorgeException {
         super(description);
         this.startTime = startTime;
         this.endTime = endTime;
+        this.isDone = isDone;
     }
 
     @Override

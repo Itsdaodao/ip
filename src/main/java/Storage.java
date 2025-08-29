@@ -8,20 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private final String filePath;
-    private final Path dataDirectory;
+    private final String fileName;
+    private final Path dataPath;
     private final static String FILE_DIRECTORY = "./data";
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
-        this.dataDirectory = Paths.get(filePath).getParent();
+    public Storage(String fileName) {
+        this.fileName = fileName;
+        this.dataPath = Paths.get(FILE_DIRECTORY + fileName);
     }
 
     public List<Task> loadTasks() throws IOException {
         List<Task> tasks = new ArrayList<>();
-        Path path = Paths.get(filePath);
 
-        if (!Files.exists(path)) {
+        if (!Files.exists(dataPath)) {
             System.out.println("File does not exist yet!");
             System.out.println("Creating new file");
             ensureDirectoryExists();
@@ -29,7 +28,7 @@ public class Storage {
         }
 
         try {
-            List<String> lines = Files.readAllLines(path);
+            List<String> lines = Files.readAllLines(dataPath);
             for (String line : lines) {
                 if (line.trim().isEmpty()) continue;
 
@@ -47,6 +46,10 @@ public class Storage {
         return tasks;
     }
 
+    public void saveTasks(List<Task> tasks) throws IOException {
+        ensureDirectoryExists();
+    }
+
     private Task parseTaskFromLine(String line) throws GeorgeException {
         String[] parts = line.split(" \\| ");
         String type = parts[0].trim();
@@ -62,13 +65,15 @@ public class Storage {
     }
 
     private void ensureDirectoryExists() throws IOException {
-        if (dataDirectory != null && !Files.exists(dataDirectory)) {
-            Files.createDirectories(dataDirectory);
-            System.out.println("Created directory: " + dataDirectory);
+        if (dataPath != null && !Files.exists(dataPath)) {
+            Files.createDirectories(dataPath);
+            System.out.println("Created file at: " + dataPath);
         }
     }
 
     public boolean fileExists() {
-        return Files.exists(Paths.get(filePath));
+        return Files.exists(dataPath);
     }
+
+
 }

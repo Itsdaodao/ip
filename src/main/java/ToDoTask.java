@@ -1,6 +1,11 @@
 public class ToDoTask extends Task {
     public ToDoTask(String description) throws GeorgeException {
+        this(description, false);
+    }
+
+    public ToDoTask(String description, boolean isDone) throws GeorgeException {
         super(description);
+        this.isDone = isDone;
     }
 
     @Override
