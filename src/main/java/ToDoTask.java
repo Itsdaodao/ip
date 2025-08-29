@@ -18,4 +18,9 @@ public class ToDoTask extends Task {
         return this.getType() + this.getStatus() + " "
                 + this.getDescription();
     }
+
+    @Override
+    public String toString() {
+        return getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription();
+    }
 }

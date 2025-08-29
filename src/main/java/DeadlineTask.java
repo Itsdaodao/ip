@@ -25,4 +25,9 @@ public class DeadlineTask extends Task {
         return this.getType() + this.getStatus()
                 + " " + this.getDescription() + " (by: " + this.getDeadline() + ")";
     }
+
+    @Override
+    public String toString() {
+        return getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription() + " | " + getDeadline();
+    }
 }

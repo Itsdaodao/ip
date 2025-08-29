@@ -23,4 +23,10 @@ public class EventTask extends Task {
         return this.getType() + this.getStatus() + " " + this.getDescription()
                 + " (from: " + this.startTime + " to: " + this.endTime + ")";
     }
+
+    @Override
+    public String toString() {
+        return getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription() + " | " + startTime + " | "
+                + endTime;
+    }
 }
