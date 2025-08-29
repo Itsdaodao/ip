@@ -1,5 +1,3 @@
-import jdk.jfr.Event;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,7 +8,7 @@ import java.util.List;
 public class Storage {
     private final String fileName;
     private final Path dataPath;
-    private final static String FILE_DIRECTORY = "./data";
+    private final static String FILE_DIRECTORY = "./data/";
 
     public Storage(String fileName) {
         this.fileName = fileName;
@@ -79,8 +77,9 @@ public class Storage {
     }
 
     private void ensureDirectoryExists() throws IOException {
-        if (dataPath != null && !Files.exists(dataPath)) {
-            Files.createDirectories(dataPath);
+        if (!Files.exists(dataPath.getParent()) && !Files.exists(dataPath)) {
+            Files.createDirectories(dataPath.getParent());
+            Files.createFile(dataPath);
             System.out.println("Created file at: " + dataPath);
         }
     }
