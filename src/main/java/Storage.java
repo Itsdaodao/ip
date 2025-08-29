@@ -49,6 +49,18 @@ public class Storage {
     public void saveTasks(List<Task> tasks) throws IOException {
         ensureDirectoryExists();
 
+        try {
+            List<String> lines = new ArrayList<>();
+            for (Task task : tasks) {
+                lines.add(task.toString());
+            }
+
+            Files.write(Paths.get(FILE_DIRECTORY + fileName), lines);
+            System.out.println("Saved " + tasks.size() + " tasks to " + dataPath);
+        } catch (IOException e) {
+            System.out.println("Error saving tasks: " + e.getMessage());
+            throw e;
+        }
 
     }
 
@@ -58,11 +70,11 @@ public class Storage {
         boolean isCompleted = parts[1].trim().equals("1");
         switch (type) {
         case "D":
-            return new DeadlineTask(parts[2], parts[3]);
+            return new DeadlineTask(parts[2], parts[3], isCompleted);
         case "E":
-            return new EventTask(parts[2], parts[3], parts[4]);
+            return new EventTask(parts[2], parts[3], parts[4], isCompleted);
         default:
-            return new ToDoTask(parts[2]);
+            return new ToDoTask(parts[2], isCompleted);
         }
     }
 
@@ -72,10 +84,4 @@ public class Storage {
             System.out.println("Created file at: " + dataPath);
         }
     }
-
-    public boolean fileExists() {
-        return Files.exists(dataPath);
-    }
-
-
 }
