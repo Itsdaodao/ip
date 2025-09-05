@@ -1,5 +1,11 @@
+import exceptions.GeorgeException;
+import utils.DateTimeParser;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class DeadlineTask extends Task {
-    private String deadline;
+    private LocalDateTime deadline;
 
     public DeadlineTask(String description, String deadline) throws GeorgeException {
         this(description, deadline, false);
@@ -7,7 +13,7 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String description, String deadline, boolean isDone) throws GeorgeException {
         super(description);
-        this.deadline = deadline;
+        this.deadline = DateTimeParser.parseDateTime(deadline);
         this.isDone = isDone;
     }
 
@@ -17,7 +23,8 @@ public class DeadlineTask extends Task {
     }
 
     public String getDeadline() {
-        return this.deadline;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return deadline.format(formatter);
     }
 
     @Override

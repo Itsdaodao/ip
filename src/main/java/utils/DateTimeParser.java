@@ -1,5 +1,6 @@
 package utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -22,25 +23,30 @@ public class DateTimeParser {
      *
      * @param dateTimeString the input datetime string
      * @return LocalDateTime object representing the parsed datetime
-     * @throws IllegalArgumentException if the string cannot be parsed with any known format
+     * @throws GeorgeException if the string cannot be parsed with any known format
      */
-    public LocalDateTime parseDateTime(String dateTimeString) throws GeorgeException {
+    public static LocalDateTime parseDateTime(String dateTimeString) throws GeorgeException {
         if (dateTimeString == null || dateTimeString.trim().isEmpty()) {
             throw new GeorgeException("DateTime string cannot be null or empty");
         }
         String trimmedInput = dateTimeString.trim();
         for (DateTimeFormatter formatter : FORMATTERS) {
             try {
-                return LocalDateTime.parse(trimmedInput, formatter);
+                if (formatter.toString().contains("HH")) {
+                    return LocalDateTime.parse(trimmedInput, formatter);
+                } else {
+                    LocalDate date = LocalDate.parse(trimmedInput, formatter);
+                    return date.atStartOfDay();
+                }
             } catch (DateTimeParseException e) {
                 continue;
             }
         }
 
-        throw new IllegalArgumentException(
+        throw new GeorgeException(
                 "Unable to parse datetime string: '" + dateTimeString +
-                        "'. Supported formats include ISO formats, US formats (MM/dd/yyyy), " +
-                        "European formats (dd/MM/yyyy), and various other common patterns."
+                        "'. Supported formats include (yyyy/MM/dd), " +
+                        "(yyyy/MM/dd hh:mm)."
         );
     }
 

@@ -1,6 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import exceptions.GeorgeException;
+import utils.DateTimeParser;
+
 public class EventTask extends Task {
-    private String startTime;
-    private String endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     public EventTask(String description, String startTime, String endTime) throws GeorgeException {
         this(description, startTime, endTime, false);
@@ -8,9 +14,14 @@ public class EventTask extends Task {
 
     public EventTask(String description, String startTime, String endTime, boolean isDone) throws GeorgeException {
         super(description);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startTime = DateTimeParser.parseDateTime(startTime);
+        this.endTime = DateTimeParser.parseDateTime(endTime);
         this.isDone = isDone;
+    }
+
+    private String getFormattedTime(LocalDateTime time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return time.format(formatter);
     }
 
     @Override
@@ -21,7 +32,7 @@ public class EventTask extends Task {
     @Override
     public String getDisplayText() {
         return this.getType() + this.getStatus() + " " + this.getDescription()
-                + " (from: " + this.startTime + " to: " + this.endTime + ")";
+                + " (from: " + this.getFormattedTime(startTime) + " to: " + this.getFormattedTime(endTime) + ")";
     }
 
     @Override
