@@ -1,3 +1,5 @@
+package exceptions;
+
 public class GeorgeException extends Exception {
     public GeorgeException(String message) {
         super(message);

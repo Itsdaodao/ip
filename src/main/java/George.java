@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
+import exceptions.GeorgeException;
 
 public class George {
     private static final String fileName = "george.txt";
