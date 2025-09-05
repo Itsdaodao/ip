@@ -11,7 +11,7 @@ public class TaskManager {
         this.storage = new Storage(dataFileName);
     }
 
-    public void addToDo(String description) throws GeorgeException {
+    public void addToDoTask(String description) throws GeorgeException {
         Task task = new ToDoTask(description);
         tasksList.add(task);
         addTask(task.getDisplayText());

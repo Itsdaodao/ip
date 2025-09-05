@@ -56,7 +56,7 @@ public class George {
                     manager.markTaskAsNotDone(taskNumber);
                 } else if (input.startsWith("todo ")) {
                     String description = input.substring(5);
-                    manager.addToDo(description);
+                    manager.addToDoTask(description);
                 } else if (input.startsWith("deadline ")) {
                     String content = input.substring(9);
                     String description = content.split("/by")[0].trim();
