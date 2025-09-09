@@ -1,4 +1,4 @@
-package exceptions;
+package george.exceptions;
 
 public class GeorgeException extends Exception {
     public GeorgeException(String message) {
