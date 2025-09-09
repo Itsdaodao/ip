@@ -8,6 +8,6 @@ public class ListCommand extends Command {
 
     @Override
     public String getCommandWord() {
-        return "List";
+        return "list";
     }
 }

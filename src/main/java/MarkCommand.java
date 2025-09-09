@@ -14,6 +14,6 @@ public class MarkCommand extends Command {
 
     @Override
     public String getCommandWord() {
-        return "Mark";
+        return "mark";
     }
 }

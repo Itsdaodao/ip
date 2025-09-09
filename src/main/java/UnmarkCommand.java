@@ -14,6 +14,6 @@ public class UnmarkCommand extends Command {
 
     @Override
     public String getCommandWord() {
-        return "Unmark";
+        return "unmark";
     }
 }
