@@ -1,11 +1,6 @@
 import exceptions.GeorgeException;
 
 public abstract class Command {
-    protected TaskManager manager;
-
-    public Command(TaskManager manager) {
-        this.manager = manager;
-    }
-
-    public abstract void execute() throws GeorgeException;
+    public abstract void execute(TaskManager manager) throws GeorgeException;
+    public abstract String getCommandWord();
 }
