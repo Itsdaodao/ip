@@ -4,6 +4,12 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 repositories {
     mavenCentral()
 }
@@ -28,7 +34,7 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("george.George")
 }
 
 shadowJar {
@@ -38,4 +44,5 @@ shadowJar {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
