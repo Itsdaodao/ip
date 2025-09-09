@@ -21,11 +21,6 @@ public class EventTask extends Task {
         this.isDone = isDone;
     }
 
-    private String getFormattedTime(LocalDateTime time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return time.format(formatter);
-    }
-
     @Override
     public String getType() {
         return "[E]";
@@ -34,12 +29,22 @@ public class EventTask extends Task {
     @Override
     public String getDisplayText() {
         return this.getType() + this.getStatus() + " " + this.getDescription()
-                + " (from: " + this.getFormattedTime(startTime) + " to: " + this.getFormattedTime(endTime) + ")";
+                + " (from: " + this.getStartTime() + " to: " + this.getEndTime() + ")";
+    }
+
+    public String getStartTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return startTime.format(formatter);
+    }
+
+    public String getEndTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return endTime.format(formatter);
     }
 
     @Override
     public String toString() {
-        return getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription() + " | " + startTime + " | "
-                + endTime;
+        return getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription() + " | " +
+                getStartTime() + " | " + getEndTime();
     }
 }
