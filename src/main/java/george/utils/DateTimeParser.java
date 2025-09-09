@@ -10,11 +10,14 @@ import george.exceptions.GeorgeException;
 
 public class DateTimeParser {
 
-    private static final List<DateTimeFormatter> FORMATTERS = Arrays.asList(
+    private static final List<DateTimeFormatter> TIME_FORMATTERS = Arrays.asList(
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+    );
+
+    private static final List<DateTimeFormatter> DATE_FORMATTERS = Arrays.asList(
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
-            DateTimeFormatter.ofPattern("yyyy/MM/dd"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")
+            DateTimeFormatter.ofPattern("yyyy/MM/dd")
     );
 
     /**
@@ -30,14 +33,18 @@ public class DateTimeParser {
             throw new GeorgeException("DateTime string cannot be null or empty");
         }
         String trimmedInput = dateTimeString.trim();
-        for (DateTimeFormatter formatter : FORMATTERS) {
+        for (DateTimeFormatter formatter : TIME_FORMATTERS) {
             try {
-                if (formatter.toString().contains("HH")) {
-                    return LocalDateTime.parse(trimmedInput, formatter);
-                } else {
-                    LocalDate date = LocalDate.parse(trimmedInput, formatter);
-                    return date.atStartOfDay();
-                }
+                return LocalDateTime.parse(trimmedInput, formatter);
+            } catch (DateTimeParseException e) {
+                continue;
+            }
+        }
+
+        for (DateTimeFormatter formatter : DATE_FORMATTERS) {
+            try {
+                LocalDate date = LocalDate.parse(trimmedInput, formatter);
+                return date.atStartOfDay();
             } catch (DateTimeParseException e) {
                 continue;
             }
