@@ -1,9 +1,14 @@
+package george;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 import george.command.Command;
 import george.command.CommandParser;
+import george.command.ExitCommand;
 import george.exceptions.GeorgeException;
+import george.task.TaskManager;
+import george.ui.Ui;
 
 public class George {
     private static final String fileName = "george.txt";
