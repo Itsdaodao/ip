@@ -4,39 +4,34 @@ import exceptions.GeorgeException;
 
 public class George {
     private static final String fileName = "george.txt";
-    private static final String newLine = """
-            
-            GEORGE the monkey LOVES to eat bananas!\
-            
-            """;
+    private final Ui ui;
+
+    public George() {
+        this.ui = new Ui();
+    }
 
     public static void main(String[] args)  {
-        greet();
+        George george = new George();
+        george.run();
+    }
+
+    private void run() {
+        ui.showWelcome();
         try {
             TaskManager manager = start();
             echo(manager);
         } catch (IOException e) {
-            System.out.println("Error starting taskmanager: " + e.getMessage());
+            ui.showError("Error starting taskmanager: " + e.getMessage());
         }
     }
 
-    private static void greet() {
-        String greeting = """
-                Ooo eee ooo aaa aaa\s
-                I am George the Monkey\
-                
-                George can help you with?""";
-        System.out.println(greeting);
-        System.out.println(newLine);
-    }
-
-    private static TaskManager start() throws IOException {
+    private TaskManager start() throws IOException {
         TaskManager manager = new TaskManager(fileName);
         manager.load();
         return manager;
     }
 
-    private static void echo(TaskManager manager) {
+    private void echo(TaskManager manager) {
         Scanner scanner = new Scanner(System.in);
 
         while (scanner.hasNextLine()) {
