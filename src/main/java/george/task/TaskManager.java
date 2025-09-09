@@ -1,12 +1,11 @@
+package george.task;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import george.exceptions.GeorgeException;
-import george.task.DeadlineTask;
-import george.task.EventTask;
-import george.task.Task;
-import george.task.ToDoTask;
 import george.utils.Storage;
+
 
 public class TaskManager {
     private List<Task> tasksList;

@@ -1,6 +1,8 @@
+package george.task;
+
 import george.exceptions.GeorgeException;
 
-abstract class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 

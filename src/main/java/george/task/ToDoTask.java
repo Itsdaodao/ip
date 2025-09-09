@@ -1,3 +1,5 @@
+package george.task;
+
 import george.exceptions.GeorgeException;
 
 public class ToDoTask extends Task {
