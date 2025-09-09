@@ -1,4 +1,4 @@
-import exceptions.GeorgeException;
+import george.exceptions.GeorgeException;
 
 abstract class Task {
     protected String description;

@@ -1,4 +1,7 @@
-import exceptions.GeorgeException;
+package george.command;
+
+import george.exceptions.GeorgeException;
+import george.task.TaskManager;
 
 public class MarkCommand extends Command {
     private final int taskNumber;

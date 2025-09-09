@@ -1,5 +1,5 @@
-import exceptions.GeorgeException;
-import utils.DateTimeParser;
+import george.exceptions.GeorgeException;
+import george.utils.DateTimeParser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,7 +1,12 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import exceptions.GeorgeException;
+import george.exceptions.GeorgeException;
+import george.task.DeadlineTask;
+import george.task.EventTask;
+import george.task.Task;
+import george.task.ToDoTask;
+import george.utils.Storage;
 
 public class TaskManager {
     private List<Task> tasksList;
@@ -44,7 +49,7 @@ public class TaskManager {
 
     public void deleteTask(int taskNumber) {
         Task removedTask = tasksList.remove(taskNumber - 1);
-        System.out.println("George will turn this task into a banana:");
+        System.out.println("george.George will turn this task into a banana:");
         System.out.println(removedTask.getDisplayText());
         System.out.println("You now have " + tasksList.size() + " tasks in the list.");
     }

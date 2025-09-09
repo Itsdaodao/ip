@@ -1,4 +1,6 @@
-import exceptions.GeorgeException;
+package george.command;
+
+import george.exceptions.GeorgeException;
 
 public class CommandParser {
     public static Command parse(String input) throws GeorgeException {

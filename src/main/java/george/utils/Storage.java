@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import exceptions.GeorgeException;
+import george.exceptions.GeorgeException;
 
 public class Storage {
     private final String fileName;

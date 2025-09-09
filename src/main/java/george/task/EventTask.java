@@ -1,8 +1,8 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import exceptions.GeorgeException;
-import utils.DateTimeParser;
+import george.exceptions.GeorgeException;
+import george.utils.DateTimeParser;
 
 public class EventTask extends Task {
     private LocalDateTime startTime;

@@ -1,3 +1,5 @@
+package george.ui;
+
 public class Ui {
     private static final String newLine = """
             

@@ -1,4 +1,4 @@
-import exceptions.GeorgeException;
+import george.exceptions.GeorgeException;
 
 public class ToDoTask extends Task {
     public ToDoTask(String description) throws GeorgeException {
