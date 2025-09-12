@@ -3,6 +3,10 @@ package george.command;
 import george.exceptions.GeorgeException;
 import george.task.TaskManager;
 
+/**
+ * Represents an invalid or unrecognized command.
+ * This command is used when user input does not match any known command format.
+ */
 public class InvalidCommand extends Command {
     @Override
     public void execute(TaskManager manager) throws GeorgeException {

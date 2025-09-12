@@ -2,7 +2,19 @@ package george.command;
 
 import george.exceptions.GeorgeException;
 
+/**
+ * Parses user input strings into corresponding Command objects.
+ * This class handles the interpretation of user commands and converts them
+ * into executable command objects that can perform the requested operations.
+ */
 public class CommandParser {
+    /**
+     * Parses the user input string and returns the corresponding Command object.
+     *
+     * @param input The raw input string entered by the user
+     * @return The Command object corresponding to the user input
+     * @throws GeorgeException If the input format is invalid or cannot be parsed
+     */
     public static Command parse(String input) throws GeorgeException {
         if (input.equals("bye")) {
             return new ExitCommand();
