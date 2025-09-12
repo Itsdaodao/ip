@@ -1,10 +1,10 @@
 package george.task;
 
-import george.exceptions.GeorgeException;
-import george.utils.DateTimeParser;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import george.exceptions.GeorgeException;
+import george.utils.DateTimeParser;
 
 public class DeadlineTask extends Task {
     private LocalDateTime deadline;
