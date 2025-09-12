@@ -85,6 +85,22 @@ public class TaskManager {
         storage.saveTasks(tasksList);
     }
 
+    /**
+     * Finds tasks containing the specified keyword in their description.
+     *
+     * @param keyword The keyword to search for.
+     * @return A list of matching tasks.
+     */
+    public List<Task> findTasks(String keyword) {
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasksList) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     public void load() throws IOException {
         tasksList = storage.loadTasks();
     }

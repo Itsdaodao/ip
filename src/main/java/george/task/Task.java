@@ -35,5 +35,5 @@ public abstract class Task {
     }
 
     abstract String getType();
-    abstract String getDisplayText();
+    public abstract String getDisplayText();
 }
