@@ -10,19 +10,34 @@ import george.exceptions.GeorgeException;
 import george.task.TaskManager;
 import george.ui.Ui;
 
+/**
+ * Main class for the George task management application.
+ * Coordinates the user interface, command parsing, and task management.
+ */
 public class George {
     private static final String fileName = "george.txt";
     private final Ui ui;
 
+    /**
+     * Constructs a George application instance.
+     */
     public George() {
         this.ui = new Ui();
     }
 
+    /**
+     * Main entry point for the George application.
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args)  {
         George george = new George();
         george.run();
     }
 
+    /**
+     * Runs the main application loop, handling initialization and user interaction.
+     */
     private void run() {
         ui.showWelcome();
         try {
@@ -33,12 +48,23 @@ public class George {
         }
     }
 
+    /**
+     * Initializes the task manager and loads existing tasks from storage.
+     *
+     * @return An initialized TaskManager instance
+     * @throws IOException If an error occurs during task loading
+     */
     private TaskManager start() throws IOException {
         TaskManager manager = new TaskManager(fileName);
         manager.load();
         return manager;
     }
 
+    /**
+     * Main command loop that reads user input, parses commands, and executes them.
+     *
+     * @param manager The TaskManager instance to operate on
+     */
     private void echo(TaskManager manager) {
         Scanner scanner = new Scanner(System.in);
 

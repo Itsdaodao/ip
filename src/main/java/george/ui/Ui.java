@@ -1,5 +1,9 @@
 package george.ui;
 
+/**
+ * Handles user interface interactions for the George application.
+ * Manages displaying messages, greetings, errors, and formatting output.
+ */
 public class Ui {
     private static final String newLine = """
             
@@ -15,28 +19,20 @@ public class Ui {
 
     private static final String exitMessage = "I love bananas \nplease bring bananas next time";
 
+    /**
+     * Displays the welcome message and introduction when the application starts.
+     */
     public void showWelcome() {
         System.out.println(greeting);
         System.out.println(newLine);
     }
 
-    public void showExit() {
-        System.out.println("\n" + exitMessage);
-    }
-
+    /**
+     * Displays an error message to the user.
+     *
+     * @param errorMessage The error message to display
+     */
     public void showError(String errorMessage) {
         System.out.println("OOPS!!! " + errorMessage);
-    }
-
-    public void showMessage(String message) {
-        System.out.println(message);
-    }
-
-    public void showLine() {
-        System.out.println("____________________________________________________________");
-    }
-
-    public String readInput() {
-        return "";
     }
 }

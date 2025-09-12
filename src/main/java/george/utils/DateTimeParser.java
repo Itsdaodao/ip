@@ -8,6 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 import george.exceptions.GeorgeException;
 
+/**
+ * Utility class for parsing date and time strings into LocalDateTime objects.
+ * Supports multiple common datetime formats and provides flexible parsing.
+ */
 public class DateTimeParser {
 
     private static final List<DateTimeFormatter> TIME_FORMATTERS = Arrays.asList(

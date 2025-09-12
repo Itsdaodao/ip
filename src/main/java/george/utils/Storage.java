@@ -13,16 +13,31 @@ import george.task.EventTask;
 import george.task.Task;
 import george.task.ToDoTask;
 
+/**
+ * Handles file storage operations for tasks, including loading and saving tasks
+ * to a persistent data file. Manages file creation and directory structure.
+ */
 public class Storage {
     private final String fileName;
     private final Path dataPath;
     private final static String FILE_DIRECTORY = "./data/";
 
+    /**
+     * Constructs a Storage object with the specified file name.
+     *
+     * @param fileName The name of the file to store tasks data
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
         this.dataPath = Paths.get(FILE_DIRECTORY + fileName);
     }
 
+    /**
+     * Loads tasks from the storage file.
+     *
+     * @return A list of tasks loaded from the file
+     * @throws IOException If an I/O error occurs during file reading
+     */
     public List<Task> loadTasks() throws IOException {
         List<Task> tasks = new ArrayList<>();
 
@@ -52,6 +67,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the list of tasks to the storage file.
+     *
+     * @param tasks The list of tasks to be saved
+     * @throws IOException If an I/O error occurs during file writing
+     */
     public void saveTasks(List<Task> tasks) throws IOException {
         ensureDirectoryExists();
 
@@ -70,6 +91,13 @@ public class Storage {
 
     }
 
+    /**
+     * Parses a single line from the storage file into a Task object.
+     *
+     * @param line The line from the storage file
+     * @return The parsed Task object
+     * @throws GeorgeException If the line format is invalid or cannot be parsed
+     */
     private Task parseTaskFromLine(String line) throws GeorgeException {
         String[] parts = line.split(" \\| ");
         String type = parts[0].trim();
@@ -84,6 +112,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Ensures that the data directory and file exist, creating them if necessary.
+     *
+     * @throws IOException If an I/O error occurs during directory/file creation
+     */
     private void ensureDirectoryExists() throws IOException {
         if (!Files.exists(dataPath.getParent()) && !Files.exists(dataPath)) {
             Files.createDirectories(dataPath.getParent());
