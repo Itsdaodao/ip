@@ -48,6 +48,7 @@ public abstract class Task {
     public String getStatus() {
         return isDone ? "[X]" : "[ ]";
     }
+
     /**
      * Returns the type identifier of the task.
      *
@@ -59,5 +60,5 @@ public abstract class Task {
      *
      * @return The formatted task information for display
      */
-    abstract String getDisplayText();
+    public abstract String getDisplayText();
 }
