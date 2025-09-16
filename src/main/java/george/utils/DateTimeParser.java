@@ -56,9 +56,9 @@ public class DateTimeParser {
         }
 
         throw new GeorgeException(
-                "Unable to parse datetime string: '" + dateTimeString +
-                        "'. Supported formats include (yyyy/MM/dd), " +
-                        "(yyyy/MM/dd hh:mm)."
+                "Unable to parse datetime string: '" + dateTimeString
+                        + "'. Supported formats include (yyyy/MM/dd), "
+                        + "(yyyy/MM/dd hh:mm)."
         );
     }
 

@@ -1,14 +1,16 @@
 package george.task;
 
-import george.exceptions.GeorgeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import george.exceptions.GeorgeException;
+
 
 class EventTaskTest {
 
@@ -25,7 +27,7 @@ class EventTaskTest {
     }
 
     @Test
-    void constructor_withIsDone_true_createsDoneTask() throws GeorgeException {
+    void constructor_withIsDoneTrue_createsDoneTask() throws GeorgeException {
         // Arrange & Act
         EventTask task = new EventTask("Birthday party", "2023-12-25 1800", "2023-12-25 2200", true);
 
@@ -36,7 +38,7 @@ class EventTaskTest {
     }
 
     @Test
-    void constructor_withIsDone_false_createsNotDoneTask() throws GeorgeException {
+    void constructor_withIsDoneFalse_createsNotDoneTask() throws GeorgeException {
         // Arrange & Act
         EventTask task = new EventTask("Conference", "2023-12-20 0900", "2023-12-20 1700", false);
 
@@ -214,7 +216,9 @@ class EventTaskTest {
             assertFalse(result.isEmpty());
 
             // Test that the result follows the expected pattern
-            assertTrue(result.matches("E \\| [01] \\| Test event \\| [A-Za-z]{3} \\d{1,2} \\d{4} \\d{1,2}:\\d{2} \\| [A-Za-z]{3} \\d{1,2} \\d{4} \\d{1,2}:\\d{2}"));
+            assertTrue(result.matches("E \\| [01] \\| Test event \\| "
+                    + "[A-Za-z]{3} \\d{1,2} \\d{4} \\d{1,2}:\\d{2} \\| "
+                    + "[A-Za-z]{3} \\d{1,2} \\d{4} \\d{1,2}:\\d{2}"));
         }
     }
 

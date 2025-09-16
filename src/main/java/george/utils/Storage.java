@@ -18,9 +18,9 @@ import george.task.ToDoTask;
  * to a persistent data file. Manages file creation and directory structure.
  */
 public class Storage {
+    private static final String FILE_DIRECTORY = "./data/";
     private final String fileName;
     private final Path dataPath;
-    private final static String FILE_DIRECTORY = "./data/";
 
     /**
      * Constructs a Storage object with the specified file name.
@@ -51,7 +51,9 @@ public class Storage {
         try {
             List<String> lines = Files.readAllLines(dataPath);
             for (String line : lines) {
-                if (line.trim().isEmpty()) continue;
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
 
                 try {
                     Task task = parseTaskFromLine(line);

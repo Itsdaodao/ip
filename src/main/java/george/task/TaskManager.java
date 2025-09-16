@@ -72,8 +72,8 @@ public class TaskManager {
     public void addTask(String displayText) {
         System.out.println("You get a task. I get a banana!");
         System.out.println(displayText);
-        System.out.println("You now have " + tasksList.size() + " things to do!!!\n" +
-                "Remember to do them NOW!!!\n");
+        System.out.println("You now have " + tasksList.size() + " things to do!!!\n"
+                + "Remember to do them NOW!!!\n");
         try {
             storage.saveTasks(tasksList);
         } catch (IOException e) {
@@ -145,11 +145,6 @@ public class TaskManager {
     }
 
     /**
-     * Loads tasks from storage into the task list.
-     *
-     * @throws IOException If an I/O error occurs during loading
-     */
-    /**
      * Finds tasks containing the specified keyword in their description.
      *
      * @param keyword The keyword to search for.
@@ -165,6 +160,11 @@ public class TaskManager {
         return matchingTasks;
     }
 
+    /**
+     * Loads tasks from storage into the task list.
+     *
+     * @throws IOException If an I/O error occurs during loading
+     */
     public void load() throws IOException {
         tasksList = storage.loadTasks();
     }

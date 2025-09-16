@@ -6,15 +6,12 @@ package george.ui;
  */
 public class Ui {
     private static final String newLine = """
-            
             GEORGE the monkey LOVES to eat bananas!\
-            
             """;
 
     private static final String greeting = """
             Ooo eee ooo aaa aaa\s
             I am George the Monkey\
-            
             George can help you with?""";
 
     private static final String exitMessage = "I love bananas \nplease bring bananas next time";

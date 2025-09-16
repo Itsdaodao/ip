@@ -91,7 +91,7 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription() + " | " +
-                getStartTime() + " | " + getEndTime();
+        return getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription() + " | "
+                + getStartTime() + " | " + getEndTime();
     }
 }

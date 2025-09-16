@@ -1,14 +1,15 @@
 package george.task;
 
-import george.exceptions.GeorgeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import george.exceptions.GeorgeException;
 
 class DeadlineTaskTest {
 
@@ -25,7 +26,7 @@ class DeadlineTaskTest {
     }
 
     @Test
-    void constructor_withIsDone_true_createsDoneTask() throws GeorgeException {
+    void constructor_withIsDoneTrue_createsDoneTask() throws GeorgeException {
         // Arrange & Act
         DeadlineTask task = new DeadlineTask("Pay bills", "2023-12-15 1800", true);
 
@@ -36,7 +37,7 @@ class DeadlineTaskTest {
     }
 
     @Test
-    void constructor_withIsDone_false_createsNotDoneTask() throws GeorgeException {
+    void constructor_withIsDoneFalse_createsNotDoneTask() throws GeorgeException {
         // Arrange & Act
         DeadlineTask task = new DeadlineTask("Study for exam", "2023-12-20 1400", false);
 
@@ -201,10 +202,10 @@ class DeadlineTaskTest {
     void differentDeadlineFormats_parsedCorrectly() throws GeorgeException {
         // Test various valid date formats
         String[] testDates = {
-                "2023-12-31 2359",
-                "2023-12-31 1200",
-                "2023-01-01 0000",
-                "2023-06-15 1430"
+            "2023-12-31 2359",
+            "2023-12-31 1200",
+            "2023-01-01 0000",
+            "2023-06-15 1430"
         };
 
         for (String date : testDates) {

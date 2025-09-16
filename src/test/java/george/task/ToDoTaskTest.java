@@ -1,13 +1,15 @@
 package george.task;
 
-import george.exceptions.GeorgeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import george.exceptions.GeorgeException;
+
 
 class ToDoTaskTest {
 
@@ -23,7 +25,7 @@ class ToDoTaskTest {
     }
 
     @Test
-    void constructor_withIsDone_true_createsDoneTask() throws GeorgeException {
+    void constructor_withIsDoneTrue_createsDoneTask() throws GeorgeException {
         // Arrange & Act
         ToDoTask task = new ToDoTask("Complete assignment", true);
 
@@ -33,7 +35,7 @@ class ToDoTaskTest {
     }
 
     @Test
-    void constructor_withIsDone_false_createsNotDoneTask() throws GeorgeException {
+    void constructor_withIsDoneFalse_createsNotDoneTask() throws GeorgeException {
         // Arrange & Act
         ToDoTask task = new ToDoTask("Read book", false);
 
