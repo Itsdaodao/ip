@@ -20,8 +20,8 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager manager) throws GeorgeException {
-        manager.addToDoTask(description);
+    public String execute(TaskManager manager) throws GeorgeException {
+        return manager.addToDoTask(description);
     }
 
     @Override

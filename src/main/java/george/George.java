@@ -61,6 +61,15 @@ public class George {
     }
 
     /**
+     * Generates a response for the user's chat message.
+     * @param input The input given by the user.
+     * @return A string that is the response of the chatbot to the user.
+     */
+    public String getResponse(String input) {
+        return;
+    }
+
+    /**
      * Main command loop that reads user input, parses commands, and executes them.
      *
      * @param manager The TaskManager instance to operate on

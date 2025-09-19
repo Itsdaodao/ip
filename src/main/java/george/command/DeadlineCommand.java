@@ -23,8 +23,8 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager manager) throws GeorgeException {
-        manager.addDeadlineTask(description, date);
+    public String execute(TaskManager manager) throws GeorgeException {
+        return manager.addDeadlineTask(description, date);
     }
 
     @Override

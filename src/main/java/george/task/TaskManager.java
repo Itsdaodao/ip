@@ -29,12 +29,13 @@ public class TaskManager {
      * Adds a new todo task to the task list.
      *
      * @param description The description of the todo task
+     * @return The display text of adding To Do Task
      * @throws GeorgeException If the task creation fails
      */
-    public void addToDoTask(String description) throws GeorgeException {
+    public String addToDoTask(String description) throws GeorgeException {
         Task task = new ToDoTask(description);
         tasksList.add(task);
-        addTask(task.getDisplayText());
+        return addTask(task.getDisplayText());
     }
 
     /**
@@ -42,12 +43,13 @@ public class TaskManager {
      *
      * @param description The description of the deadline task
      * @param date The deadline date string
+     * @return The display text of adding Deadline Task.
      * @throws GeorgeException If the task creation fails
      */
-    public void addDeadlineTask(String description, String date) throws GeorgeException {
+    public String addDeadlineTask(String description, String date) throws GeorgeException {
         Task task = new DeadlineTask(description, date);
         tasksList.add(task);
-        addTask(task.getDisplayText());
+        return addTask(task.getDisplayText());
     }
 
     /**
@@ -56,82 +58,101 @@ public class TaskManager {
      * @param description The description of the event task
      * @param startTime The start time string of the event
      * @param endTime The end time string of the event
+     * @return The display text of adding Event Task.
      * @throws GeorgeException If the task creation fails
      */
-    public void addEventTask(String description, String startTime, String endTime) throws GeorgeException {
+    public String addEventTask(String description, String startTime, String endTime) throws GeorgeException {
         Task task = new EventTask(description, startTime, endTime);
         tasksList.add(task);
-        addTask(task.getDisplayText());
+        return addTask(task.getDisplayText());
     }
 
     /**
      * Handles the common operations after adding any task.
      *
      * @param displayText The formatted display text of the added task
+     * @return The display message for adding a task.
      */
-    public void addTask(String displayText) {
-        System.out.println("You get a task. I get a banana!");
-        System.out.println(displayText);
-        System.out.println("You now have " + tasksList.size() + " things to do!!!\n"
-                + "Remember to do them NOW!!!\n");
+    public String addTask(String displayText) {
         try {
             storage.saveTasks(tasksList);
         } catch (IOException e) {
             System.out.println("Error while saving tasks: " + e.getMessage());
         }
+        String message = "You get a task. I get a banana!\n"
+                + displayText + "\nYou now have "
+                + tasksList.size() + " things to do!!!\n"
+                + "Remember to do them NOW!!!\n";
+        return message;
     }
 
     /**
      * Deletes a task from the task list by its number.
      *
      * @param taskNumber The number of the task to delete (1-based index)
+     * @return The display message of deleting a task.
      */
-    public void deleteTask(int taskNumber) {
+    public String deleteTask(int taskNumber) {
         Task removedTask = tasksList.remove(taskNumber - 1);
-        System.out.println("george.George will turn this task into a banana:");
-        System.out.println(removedTask.getDisplayText());
-        System.out.println("You now have " + tasksList.size() + " tasks in the list.");
+        String message = "george.George will turn this task into a banana:\n"
+                + removedTask.getDisplayText() + "\nYou now have "
+                + tasksList.size() + " tasks in the list.";
+        return message;
     }
 
     /**
      * Lists all tasks in the task list with their status and descriptions.
+     *
+     * @return A formatted string containing all tasks or a message if the list is empty
      */
-    public void listTasks() {
+    public String listTasks() {
         if (tasksList.isEmpty()) {
-            System.out.println("Wow you have no tasks! Here is a banana!");
-            return;
+            return "Wow you have no tasks! Here is a banana!";
         }
 
-        System.out.println("OOO OOO AAA AAA here is all your tasks");
+        StringBuilder result = new StringBuilder();
+        result.append("OOO OOO AAA AAA here is all your tasks\n");
         for (int i = 0; i < tasksList.size(); i++) {
             Task task = tasksList.get(i);
-            System.out.println((i + 1) + "." + task.getDisplayText());
+            result.append((i + 1) + "." + task.getDisplayText() + "\n");
         }
-        System.out.println("EEE EEE AAA AAA remember to do them all");
+        result.append("EEE EEE AAA AAA remember to do them all");
+
+        return result.toString();
     }
 
     /**
      * Marks a task as done by its number.
      *
      * @param taskNumber The number of the task to mark as done (1-based index)
+     * @return A success message with the marked task details
      */
-    public void markTaskAsDone(int taskNumber) {
+    public String markTaskAsDone(int taskNumber) {
         Task task = tasksList.get(taskNumber - 1);
         task.markAsDone();
-        System.out.println("Good job! Here is a banana for you!");
-        System.out.println("[X] " + task.getDescription());
+
+        StringBuilder result = new StringBuilder();
+        result.append("Good job! Here is a banana for you!\n");
+        result.append("[X] " + task.getDescription());
+
+        return result.toString();
     }
 
     /**
      * Marks a task as not done by its number.
      *
      * @param taskNumber The number of the task to mark as not done (1-based index)
+     * @return An encouragement message with the unmarked task details
      */
-    public void markTaskAsNotDone(int taskNumber) {
+    public String markTaskAsNotDone(int taskNumber) {
         Task task = tasksList.get(taskNumber - 1);
         task.markAsNotDone();
-        System.out.println("Come on! You can do it!");
-        System.out.println("[ ] " + task.getDescription());
+
+        StringBuilder result = new StringBuilder();
+        result.append("Come on! You can do it!\n");
+        result.append("[ ] " + task.getDescription());
+
+        return result.toString();
     }
 
     /**

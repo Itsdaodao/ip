@@ -25,10 +25,11 @@ public class FindCommand extends Command {
      * Executes the find command by searching for tasks containing the keyword.
      *
      * @param manager The TaskManager containing all tasks.
+     * @return the output text for the GUI.
      * @throws GeorgeException If there's an error during execution.
      */
     @Override
-    public void execute(TaskManager manager) throws GeorgeException {
+    public String execute(TaskManager manager) throws GeorgeException {
         if (keyword == null || keyword.trim().isEmpty()) {
             throw new GeorgeException("Please provide a keyword to search for.");
         }
@@ -36,15 +37,15 @@ public class FindCommand extends Command {
         List<Task> matchingTasks = manager.findTasks(keyword);
 
         if (matchingTasks.isEmpty()) {
-            System.out.println("No matching tasks found for: " + keyword);
+            return "No matching tasks found for: " + keyword;
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
             for (int i = 0; i < matchingTasks.size(); i++) {
-                System.out.println((i + 1) + "." + matchingTasks.get(i).getDisplayText());
+                response.append((i + 1) + "." + matchingTasks.get(i).getDisplayText() + "\n");
             }
+            return response.toString();
         }
     }
-
     @Override
     public String getCommandWord() {
         return "find";

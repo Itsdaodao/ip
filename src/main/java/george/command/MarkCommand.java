@@ -20,8 +20,8 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager manager) throws GeorgeException {
-        manager.markTaskAsDone(taskNumber);
+    public String execute(TaskManager manager) throws GeorgeException {
+        return manager.markTaskAsDone(taskNumber);
     }
 
     @Override

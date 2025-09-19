@@ -20,8 +20,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager manager) throws GeorgeException {
-        manager.deleteTask(taskNumber);
+    public String execute(TaskManager manager) throws GeorgeException {
+        return manager.deleteTask(taskNumber);
     }
 
     @Override

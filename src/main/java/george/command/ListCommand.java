@@ -8,7 +8,7 @@ import george.task.TaskManager;
  */
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskManager manager) {
+    public String execute(TaskManager manager) {
         manager.listTasks();
     }
 

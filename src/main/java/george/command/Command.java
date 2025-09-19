@@ -13,9 +13,10 @@ public abstract class Command {
      * Executes the command using the provided TaskManager.
      *
      * @param manager The TaskManager that handles task operations and state
+     * @return The response text that will be sent to the GUI.
      * @throws GeorgeException If an error occurs during command execution
      */
-    public abstract void execute(TaskManager manager) throws GeorgeException;
+    public abstract String execute(TaskManager manager) throws GeorgeException;
     /**
      * Returns the command word that identifies this specific command type.
      * This is typically the first word entered by the user that triggers this command.

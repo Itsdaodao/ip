@@ -26,8 +26,8 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager manager) throws GeorgeException {
-        manager.addEventTask(description, start, end);
+    public String execute(TaskManager manager) throws GeorgeException {
+        return manager.addEventTask(description, start, end);
     }
 
     @Override

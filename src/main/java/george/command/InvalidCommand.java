@@ -9,7 +9,7 @@ import george.task.TaskManager;
  */
 public class InvalidCommand extends Command {
     @Override
-    public void execute(TaskManager manager) throws GeorgeException {
+    public String execute(TaskManager manager) throws GeorgeException {
         throw new GeorgeException("What are you saying???");
     }
 

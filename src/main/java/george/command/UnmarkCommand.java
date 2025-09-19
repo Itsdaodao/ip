@@ -20,8 +20,8 @@ public class UnmarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager manager) throws GeorgeException {
-        manager.markTaskAsNotDone(taskNumber);
+    public String execute(TaskManager manager) throws GeorgeException {
+        return manager.markTaskAsNotDone(taskNumber);
     }
 
     @Override
