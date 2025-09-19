@@ -35,6 +35,7 @@ public class TaskManager {
     public String addToDoTask(String description) throws GeorgeException {
         Task task = new ToDoTask(description);
         tasksList.add(task);
+        saveTasks();
         return addTask(task.getDisplayText());
     }
 
@@ -49,6 +50,7 @@ public class TaskManager {
     public String addDeadlineTask(String description, String date) throws GeorgeException {
         Task task = new DeadlineTask(description, date);
         tasksList.add(task);
+        saveTasks();
         return addTask(task.getDisplayText());
     }
 
@@ -64,6 +66,7 @@ public class TaskManager {
     public String addEventTask(String description, String startTime, String endTime) throws GeorgeException {
         Task task = new EventTask(description, startTime, endTime);
         tasksList.add(task);
+        saveTasks();
         return addTask(task.getDisplayText());
     }
 
@@ -74,11 +77,6 @@ public class TaskManager {
      * @return The display message for adding a task.
      */
     public String addTask(String displayText) {
-        try {
-            storage.saveTasks(tasksList);
-        } catch (IOException e) {
-            System.out.println("Error while saving tasks: " + e.getMessage());
-        }
         String message = "You get a task. I get a banana!\n"
                 + displayText + "\nYou now have "
                 + tasksList.size() + " things to do!!!\n"
@@ -94,6 +92,7 @@ public class TaskManager {
      */
     public String deleteTask(int taskNumber) {
         Task removedTask = tasksList.remove(taskNumber - 1);
+        saveTasks();
         String message = "george.George will turn this task into a banana:\n"
                 + removedTask.getDisplayText() + "\nYou now have "
                 + tasksList.size() + " tasks in the list.";
@@ -130,6 +129,7 @@ public class TaskManager {
     public String markTaskAsDone(int taskNumber) {
         Task task = tasksList.get(taskNumber - 1);
         task.markAsDone();
+        saveTasks();
 
         StringBuilder result = new StringBuilder();
         result.append("Good job! Here is a banana for you!\n");
@@ -147,6 +147,7 @@ public class TaskManager {
     public String markTaskAsNotDone(int taskNumber) {
         Task task = tasksList.get(taskNumber - 1);
         task.markAsNotDone();
+        saveTasks();
 
         StringBuilder result = new StringBuilder();
         result.append("Come on! You can do it!\n");
@@ -158,11 +159,13 @@ public class TaskManager {
     /**
      * Saves the current task list to storage.
      *
-     * @param tasksList The list of tasks to save
-     * @throws IOException If an I/O error occurs during saving
      */
-    private void save(List<Task> tasksList) throws IOException {
-        storage.saveTasks(tasksList);
+    private void saveTasks() {
+        try {
+            storage.saveTasks(tasksList);
+        } catch (IOException e) {
+            System.out.println("Error while saving tasks: " + e.getMessage());
+        }
     }
 
     /**

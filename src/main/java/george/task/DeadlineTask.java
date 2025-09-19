@@ -39,6 +39,20 @@ public class DeadlineTask extends Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Constructs a DeadlineTask with description, deadline as LocalDateTime object, and completion status.
+     * This constructor is used when the deadline datetime is already parsed and available.
+     *
+     * @param description The description of the deadline task
+     * @param deadline The deadline time as a LocalDateTime object
+     * @param isDone The completion status of the task
+     */
+    public DeadlineTask(String description, LocalDateTime deadline, boolean isDone) throws GeorgeException {
+        super(description);
+        this.deadline = deadline;
+        this.isDone = isDone;
+    }
+
     @Override
     public String getType() {
         return "[D]";

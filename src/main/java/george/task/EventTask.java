@@ -28,6 +28,22 @@ public class EventTask extends Task {
     }
 
     /**
+     * Constructs an EventTask with description, start time, and end time as LocalDateTime objects.
+     * This constructor is used when datetime objects are already parsed and available.
+     *
+     * @param description The description of the event task
+     * @param startTime The start time as a LocalDateTime object
+     * @param endTime The end time as a LocalDateTime object
+     */
+    public EventTask(String description, LocalDateTime startTime, LocalDateTime endTime, boolean isDone)
+            throws GeorgeException {
+        super(description);
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.isDone = isDone;
+    }
+
+    /**
      * Constructs an EventTask with description, start time, end time, and completion status.
      *
      * @param description The description of the event task

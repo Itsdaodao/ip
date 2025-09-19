@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +85,7 @@ public class Storage {
                 lines.add(task.toString());
             }
 
-            Files.write(Paths.get(FILE_DIRECTORY + fileName), lines);
+            Files.write(dataPath, lines);
             System.out.println("Saved " + tasks.size() + " tasks to " + dataPath);
         } catch (IOException e) {
             System.out.println("Error saving tasks: " + e.getMessage());
@@ -104,11 +105,17 @@ public class Storage {
         String[] parts = line.split(" \\| ");
         String type = parts[0].trim();
         boolean isCompleted = parts[1].trim().equals("1");
+
         switch (type) {
         case "D":
-            return new DeadlineTask(parts[2], parts[3], isCompleted);
+            // For deadlines, parts[3] is the date string like "Apr 25 2025"
+            LocalDateTime deadlineDate = DateTimeParser.parseStoredDate(parts[3].trim());
+            return new DeadlineTask(parts[2], deadlineDate, isCompleted);
         case "E":
-            return new EventTask(parts[2], parts[3], parts[4], isCompleted);
+            // For events, parts[3] is start date and parts[4] is end date
+            LocalDateTime startDate = DateTimeParser.parseStoredDate(parts[3].trim());
+            LocalDateTime endDate = DateTimeParser.parseStoredDate(parts[4].trim());
+            return new EventTask(parts[2], startDate, endDate, isCompleted);
         default:
             return new ToDoTask(parts[2], isCompleted);
         }
@@ -120,8 +127,10 @@ public class Storage {
      * @throws IOException If an I/O error occurs during directory/file creation
      */
     private void ensureDirectoryExists() throws IOException {
-        if (!Files.exists(dataPath.getParent()) && !Files.exists(dataPath)) {
+        if (!Files.exists(dataPath.getParent())) {
             Files.createDirectories(dataPath.getParent());
+        }
+        if (!Files.exists(dataPath)) {
             Files.createFile(dataPath);
             System.out.println("Created file at: " + dataPath);
         }

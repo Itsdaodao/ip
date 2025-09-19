@@ -17,7 +17,9 @@ public class DateTimeParser {
 
     private static final List<DateTimeFormatter> TIME_FORMATTERS = Arrays.asList(
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
+            DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm"),
+            DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")
     );
 
     private static final List<DateTimeFormatter> DATE_FORMATTERS = Arrays.asList(
@@ -63,25 +65,27 @@ public class DateTimeParser {
     }
 
     /**
-     * Convenience method that returns the supported formats for reference.
+     * Parses a date string in the format "MMM dd yyyy" (e.g., "Apr 25 2025") into a LocalDateTime object.
+     * This is specifically for parsing dates that were stored in the file.
      *
-     * @return List of example datetime format patterns
+     * @param dateString the input date string in "MMM dd yyyy" format
+     * @return LocalDateTime object representing the parsed date at start of day
+     * @throws GeorgeException if the string cannot be parsed with the expected format
      */
-    public List<String> getSupportedFormats() {
-        return Arrays.asList(
-                "yyyy-MM-dd",
-                "yyyy/MM/dd",
-                "yyyy-MM-dd HH:mm",
-                "yyyy-MM-dd HHmm"
-        );
-    }
+    public static LocalDateTime parseStoredDate(String dateString) throws GeorgeException {
+        if (dateString == null || dateString.trim().isEmpty()) {
+            throw new GeorgeException("Date string cannot be null or empty");
+        }
 
-    public List<String> getSupportedExamples() {
-        return Arrays.asList(
-                "2025-04-10",
-                "2025/03/25",
-                "2025/12/25 15:45",
-                "2019-08-17 0137"
-        );
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+            LocalDate date = LocalDate.parse(dateString.trim(), formatter);
+            return date.atStartOfDay();
+        } catch (DateTimeParseException e) {
+            throw new GeorgeException(
+                    "Unable to parse stored date string: '" + dateString
+                    + "'. Expected format: MMM dd yyyy (e.g., 'Apr 25 2025')"
+            );
+        }
     }
 }
