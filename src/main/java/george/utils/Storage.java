@@ -91,7 +91,6 @@ public class Storage {
             System.out.println("Error saving tasks: " + e.getMessage());
             throw e;
         }
-
     }
 
     /**
@@ -112,10 +111,11 @@ public class Storage {
             LocalDateTime deadlineDate = DateTimeParser.parseStoredDate(parts[3].trim());
             return new DeadlineTask(parts[2], deadlineDate, isCompleted);
         case "E":
-            // For events, parts[3] is start date and parts[4] is end date
-            LocalDateTime startDate = DateTimeParser.parseStoredDate(parts[3].trim());
-            LocalDateTime endDate = DateTimeParser.parseStoredDate(parts[4].trim());
-            return new EventTask(parts[2], startDate, endDate, isCompleted);
+            // For events, parts[3] is start datetime and parts[4] is end datetime
+            // Both are in format like "Dec 05 2025 15:00"
+            LocalDateTime startDateTime = DateTimeParser.parseStoredDateTime(parts[3].trim());
+            LocalDateTime endDateTime = DateTimeParser.parseStoredDateTime(parts[4].trim());
+            return new EventTask(parts[2], startDateTime, endDateTime, isCompleted);
         default:
             return new ToDoTask(parts[2], isCompleted);
         }

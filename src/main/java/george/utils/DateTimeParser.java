@@ -88,4 +88,29 @@ public class DateTimeParser {
             );
         }
     }
+
+    /**
+     * Parses a datetime string in the format "MMM dd yyyy HH:mm" (e.g., "Dec 05 2025 15:00")
+     * into a LocalDateTime object. This is specifically for parsing datetime strings that
+     * were stored in the file for events.
+     *
+     * @param dateTimeString the input datetime string in "MMM dd yyyy HH:mm" format
+     * @return LocalDateTime object representing the parsed datetime
+     * @throws GeorgeException if the string cannot be parsed with the expected format
+     */
+    public static LocalDateTime parseStoredDateTime(String dateTimeString) throws GeorgeException {
+        if (dateTimeString == null || dateTimeString.trim().isEmpty()) {
+            throw new GeorgeException("DateTime string cannot be null or empty");
+        }
+
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+            return LocalDateTime.parse(dateTimeString.trim(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new GeorgeException(
+                    "Unable to parse stored datetime string: '" + dateTimeString
+                            + "'. Expected format: MMM dd yyyy HH:mm (e.g., 'Dec 05 2025 15:00')"
+            );
+        }
+    }
 }
