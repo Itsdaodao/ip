@@ -9,7 +9,7 @@ import george.task.TaskManager;
 public class ListCommand extends Command {
     @Override
     public String execute(TaskManager manager) {
-        manager.listTasks();
+        return manager.listTasks();
     }
 
     @Override
