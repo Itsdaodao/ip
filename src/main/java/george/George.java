@@ -17,6 +17,8 @@ import george.ui.Ui;
 public class George {
     private static final String fileName = "george.txt";
     private final Ui ui;
+    private TaskManager manager;
+    private boolean isInitialised = false;
 
     /**
      * Constructs a George application instance.
@@ -57,6 +59,7 @@ public class George {
     private TaskManager start() throws IOException {
         TaskManager manager = new TaskManager(fileName);
         manager.load();
+        isInitialised = true;
         return manager;
     }
 
@@ -66,7 +69,37 @@ public class George {
      * @return A string that is the response of the chatbot to the user.
      */
     public String getResponse(String input) {
-        return;
+        try {
+            // Initialize TaskManager if not already done
+            if (!isInitialised) {
+                initializeTaskManager();
+            }
+
+            Command command = CommandParser.parse(input);
+            String response = command.execute(manager);
+
+            return response;
+
+        } catch (GeorgeException e) {
+            return e.toString();
+        } catch (NumberFormatException e) {
+            return "Please provide a valid task number!";
+        } catch (IOException e) {
+            return "Error loading tasks: " + e.getMessage();
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
+        }
+    }
+
+    /**
+     * Initializes the task manager and loads existing tasks from storage.
+     *
+     * @throws IOException If an error occurs during task loading
+     */
+    private void initializeTaskManager() throws IOException {
+        manager = new TaskManager(fileName);
+        manager.load();
+        isInitialised = true;
     }
 
     /**
