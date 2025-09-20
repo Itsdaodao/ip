@@ -26,7 +26,11 @@ public class ToDoTask extends Task {
      */
     public ToDoTask(String description, boolean isDone) throws GeorgeException {
         super(description);
+
+        assert description != null : "Description cannot be null - should be caught by super()";
+        assert !description.trim().isEmpty() : "Description cannot be empty - should be caught by super()";
         this.isDone = isDone;
+        assert this.getDescription().equals(description) : "Description should be properly set";
     }
 
     /**
@@ -46,8 +50,15 @@ public class ToDoTask extends Task {
      */
     @Override
     public String getDisplayText() {
-        return this.getType() + this.getStatus() + " "
+        String displayText = this.getType() + this.getStatus() + " "
                 + this.getDescription();
+
+        assert displayText != null : "Display text cannot be null";
+        assert displayText.contains("[T]") : "Display text should contain task type";
+        assert displayText.contains(this.getDescription()) : "Display text should contain description";
+        assert displayText.contains("[") && displayText.contains("]") : "Display text should contain status brackets";
+
+        return displayText;
     }
 
     /**
@@ -57,6 +68,14 @@ public class ToDoTask extends Task {
      */
     @Override
     public String toString() {
-        return getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription();
+        String tempString = getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription();
+        assert tempString != null : "Storage string cannot be null";
+        assert tempString.startsWith("T | ") : "Storage string should start with 'T | '";
+        assert tempString.contains(" | ") : "Storage string should contain pipe separators";
+        assert tempString.contains(isDone() ? " | 1 | " : " | 0 | ") : "Storage string should contain correct status";
+        assert tempString.endsWith(getDescription()) : "Storage string should end with description";
+
+        return tempString;
+
     }
 }
