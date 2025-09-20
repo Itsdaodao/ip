@@ -21,6 +21,7 @@ public class MarkCommand extends Command {
 
     @Override
     public String execute(TaskManager manager) throws GeorgeException {
+        // The duplicate marking check is now handled inside TaskManager.markTaskAsDone()
         return manager.markTaskAsDone(taskNumber);
     }
 

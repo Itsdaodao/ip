@@ -11,7 +11,7 @@ public class Ui {
 
     private static final String greeting = """
             Ooo eee ooo aaa aaa\s
-            I am George the Monkey\
+            I am George the Monkey \n
             George can help you with?""";
 
     /**
@@ -29,5 +29,14 @@ public class Ui {
      */
     public void showError(String errorMessage) {
         System.out.println("OOPS!!! " + errorMessage);
+    }
+
+    /**
+     * Returns the welcome message for GUI display.
+     *
+     * @return The formatted welcome message
+     */
+    public String getWelcomeMessage() {
+        return greeting;
     }
 }

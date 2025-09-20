@@ -1,9 +1,6 @@
 package george.command;
 
-import java.util.List;
-
 import george.exceptions.GeorgeException;
-import george.task.Task;
 import george.task.TaskManager;
 
 /**
@@ -34,18 +31,10 @@ public class FindCommand extends Command {
             throw new GeorgeException("Please provide a keyword to search for.");
         }
 
-        List<Task> matchingTasks = manager.findTasks(keyword);
-
-        if (matchingTasks.isEmpty()) {
-            return "No matching tasks found for: " + keyword;
-        } else {
-            StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                response.append((i + 1) + "." + matchingTasks.get(i).getDisplayText() + "\n");
-            }
-            return response.toString();
-        }
+        // Now findTasks returns a String directly
+        return manager.findTasks(keyword);
     }
+
     @Override
     public String getCommandWord() {
         return "find";

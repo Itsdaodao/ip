@@ -24,6 +24,7 @@ public class CommandParser {
         case "list" -> new ListCommand();
         case "help" -> new HelpCommand();
         case "format" -> new FormatCommand();
+        case "find" -> parseFindCommand(input); // Added find command
         case "mark" -> parseMarkCommand(input);
         case "unmark" -> parseUnmarkCommand(input);
         case "todo" -> parseTodoCommand(input);
@@ -32,6 +33,14 @@ public class CommandParser {
         case "delete" -> parseDeleteCommand(input);
         default -> new InvalidCommand();
         };
+    }
+
+    private static FindCommand parseFindCommand(String input) throws GeorgeException {
+        if (input.length() <= 5) { // "find " is 5 characters
+            throw new GeorgeException("Please provide a keyword to search for.");
+        }
+        String keyword = input.substring(5).trim();
+        return new FindCommand(keyword);
     }
 
     private static MarkCommand parseMarkCommand(String input) {

@@ -1,5 +1,6 @@
 package george;
 
+import george.ui.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -25,6 +26,7 @@ public class MainWindow extends AnchorPane {
 
     private George george;
     private Stage stage;
+    private Ui ui = new Ui();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -32,6 +34,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showWelcomeMessage();
     }
 
     /** Injects the Duke instance */
@@ -88,5 +91,9 @@ public class MainWindow extends AnchorPane {
                 || response.contains("Unable to")
                 || response.contains("Invalid")
                 || response.toLowerCase().contains("error");
+    }
+
+    private void showWelcomeMessage() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.getWelcomeMessage(), dukeImage));
     }
 }
