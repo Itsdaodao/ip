@@ -165,7 +165,7 @@ public class TaskManager {
         Task task = tasksList.get(taskNumber - 1);
 
         if (task.isDone()) {
-            throw new GeorgeException("Task " + taskNumber + " is already marked as done! ✅");
+            throw new GeorgeException("Task " + taskNumber + " is already marked as done!");
         }
 
         task.markAsDone();
@@ -195,18 +195,6 @@ public class TaskManager {
 
         return "Come on! You can do it!\n"
                 + "[ ] " + task.getDescription();
-    }
-
-    /**
-     * Returns the task at the specified index.
-     *
-     * @param index The index of the task (1-based)
-     * @return The task at the specified index
-     * @throws GeorgeException if the index is invalid
-     */
-    public Task getTask(int index) throws GeorgeException {
-        validateTaskIndex(index);
-        return tasksList.get(index - 1);
     }
 
     /**
