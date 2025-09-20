@@ -16,25 +16,22 @@ public class CommandParser {
      * @throws GeorgeException If the input format is invalid or cannot be parsed
      */
     public static Command parse(String input) throws GeorgeException {
-        if (input.equals("bye")) {
-            return new ExitCommand();
-        } else if (input.equals("list")) {
-            return new ListCommand();
-        } else if (input.startsWith("mark ")) {
-            return parseMarkCommand(input);
-        } else if (input.startsWith("unmark ")) {
-            return parseUnmarkCommand(input);
-        } else if (input.startsWith("todo ")) {
-            return parseTodoCommand(input);
-        } else if (input.startsWith("deadline ")) {
-            return parseDeadlineCommand(input);
-        } else if (input.startsWith("event ")) {
-            return parseEventCommand(input);
-        } else if (input.startsWith("delete ")) {
-            return parseDeleteCommand(input);
-        } else {
-            return new InvalidCommand();
-        }
+        String commandWord = input.contains(" ") ? input.substring(0, input.indexOf(" ")) : input;
+        commandWord = commandWord.toLowerCase();
+
+        return switch (commandWord) {
+        case "bye" -> new ExitCommand();
+        case "list" -> new ListCommand();
+        case "help" -> new HelpCommand();
+        case "format" -> new FormatCommand();
+        case "mark" -> parseMarkCommand(input);
+        case "unmark" -> parseUnmarkCommand(input);
+        case "todo" -> parseTodoCommand(input);
+        case "deadline" -> parseDeadlineCommand(input);
+        case "event" -> parseEventCommand(input);
+        case "delete" -> parseDeleteCommand(input);
+        default -> new InvalidCommand();
+        };
     }
 
     private static MarkCommand parseMarkCommand(String input) {
