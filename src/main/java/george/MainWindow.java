@@ -1,5 +1,6 @@
 package george;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +8,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for the main GUI.
  */
@@ -21,6 +24,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private George george;
+    private Stage stage;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -33,6 +37,11 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setGeorge(George g) {
         george = g;
+    }
+
+    /** Sets the stage for closing the application */
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     /**
@@ -48,5 +57,23 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        // Check if the user entered the exit command
+        if (input.trim().equalsIgnoreCase("bye")) {
+            // Add a slight delay before closing to show the response
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1000); // Wait 1 second to show the response
+                    Platform.runLater(() -> {
+                        if (stage != null) {
+                            stage.close();
+                        }
+                        Platform.exit();
+                    });
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }).start();
+        }
     }
 }
