@@ -54,7 +54,8 @@ public class MainWindow extends AnchorPane {
         String response = george.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                isErrorMessage(response) ? DialogBox.getErrorDialog(response, dukeImage)
+                        : DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
 
@@ -75,5 +76,17 @@ public class MainWindow extends AnchorPane {
                 }
             }).start();
         }
+    }
+
+    /**
+     * Detects if a response is an error message.
+     * You can customize this logic based on how your George class returns errors.
+     */
+    private boolean isErrorMessage(String response) {
+        // Check for common error indicators
+        return response.contains("Error:")
+                || response.contains("Unable to")
+                || response.contains("Invalid")
+                || response.toLowerCase().contains("error");
     }
 }
