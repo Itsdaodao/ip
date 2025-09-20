@@ -22,7 +22,12 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setGeorge(george);
+
+            MainWindow controller = fxmlLoader.<MainWindow>getController();
+            controller.setGeorge(george);
+            controller.setStage(stage); // Pass the stage reference
+
+            stage.setTitle("George"); // Optional: set a title for the window
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

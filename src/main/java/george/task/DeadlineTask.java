@@ -62,8 +62,6 @@ public class DeadlineTask extends Task {
 
         this.deadline = deadline;
         this.isDone = isDone;
-
-        assert this.deadline.equals(deadline) : "Deadline should be properly set";
     }
 
     @Override

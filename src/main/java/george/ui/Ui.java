@@ -14,8 +14,6 @@ public class Ui {
             I am George the Monkey\
             George can help you with?""";
 
-    private static final String exitMessage = "I love bananas \nplease bring bananas next time";
-
     /**
      * Displays the welcome message and introduction when the application starts.
      */
