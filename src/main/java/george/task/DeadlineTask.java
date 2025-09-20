@@ -82,7 +82,8 @@ public class DeadlineTask extends Task {
         String formattedDeadline = deadline.format(formatter);
 
         assert formattedDeadline != null : "Formatted deadline cannot be null";
-        assert formattedDeadline.length() >= 11 : "Formatted deadline should be at least 11 characters (e.g., 'Jan 15 2024')";
+        assert formattedDeadline.length() >= 11
+                : "Formatted deadline should be at least 11 characters (e.g., 'Jan 15 2024')";
         assert formattedDeadline.matches("[A-Za-z]{3} \\d{1,2} \\d{4}")
                 : "Formatted deadline should match pattern 'MMM dd yyyy'";
 

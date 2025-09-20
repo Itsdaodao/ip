@@ -38,6 +38,9 @@ public class EventTask extends Task {
     public EventTask(String description, LocalDateTime startTime, LocalDateTime endTime, boolean isDone)
             throws GeorgeException {
         super(description);
+        assert startTime != null : "Start time cannot be null";
+        assert endTime != null : "End time cannot be null";
+        assert !startTime.isAfter(endTime) : "Start time must be before or equal to end time";
         this.startTime = startTime;
         this.endTime = endTime;
         this.isDone = isDone;
@@ -54,9 +57,14 @@ public class EventTask extends Task {
      */
     public EventTask(String description, String startTime, String endTime, boolean isDone) throws GeorgeException {
         super(description);
+        assert startTime != null && !startTime.trim().isEmpty() : "Start time string cannot be null or empty";
+        assert endTime != null && !endTime.trim().isEmpty() : "End time string cannot be null or empty";
         this.startTime = DateTimeParser.parseDateTime(startTime);
         this.endTime = DateTimeParser.parseDateTime(endTime);
         this.isDone = isDone;
+        assert this.startTime != null : "Parsed start time cannot be null";
+        assert this.endTime != null : "Parsed end time cannot be null";
+        assert !this.startTime.isAfter(this.endTime) : "Start time must be before or equal to end time";
     }
 
     /**
@@ -76,6 +84,8 @@ public class EventTask extends Task {
      */
     @Override
     public String getDisplayText() {
+        assert startTime != null : "Start time must be initialized before calling getDisplayText";
+        assert endTime != null : "End time must be initialized before calling getDisplayText";
         return this.getType() + this.getStatus() + " " + this.getDescription()
                 + " (from: " + this.getStartTime() + " to: " + this.getEndTime() + ")";
     }
@@ -86,6 +96,7 @@ public class EventTask extends Task {
      * @return The start time formatted as "MMM dd yyyy HH:mm"
      */
     public String getStartTime() {
+        assert startTime != null : "Start time cannot be null when formatting";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return startTime.format(formatter);
     }
@@ -96,6 +107,7 @@ public class EventTask extends Task {
      * @return The end time formatted as "MMM dd yyyy HH:mm"
      */
     public String getEndTime() {
+        assert endTime != null : "End time cannot be null when formatting";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         return endTime.format(formatter);
     }
@@ -107,6 +119,9 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
+        assert startTime != null : "Start time must be initialized for toString";
+        assert endTime != null : "End time must be initialized for toString";
+
         return getType().charAt(1) + " | " + (isDone() ? 1 : 0) + " | " + getDescription() + " | "
                 + getStartTime() + " | " + getEndTime();
     }
